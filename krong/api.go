@@ -26,7 +26,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	_, err = c.WriteOne(fmt.Sprintf("INSERT OR REPLACE INTO %s (name,email,type,address) VALUES('%s','%s','%s','%s');", USERS_TABLE_NAME, u.Name, u.Email, u.Type, u.Address))
 	if err != nil {
 		fmt.Println(err)
-		http.Error(w, "Error writting user to database", http.StatusInternalServerError)
+		http.Error(w, "Error writing user to database", http.StatusInternalServerError)
 		return
 	}
 
@@ -72,7 +72,7 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 	_, err := c.WriteOne(fmt.Sprintf("REPLACE INTO %s (name,email,type,address) VALUES('%s','%s','%s','%s') WHERE _rowid_=%d;", USERS_TABLE_NAME, u.Name, u.Email, u.Type, u.Address, uid))
 	if err != nil {
 		fmt.Println(err)
-		http.Error(w, "Error writting user to database", http.StatusInternalServerError)
+		http.Error(w, "Error writing user to database", http.StatusInternalServerError)
 		return
 	}
 
@@ -115,7 +115,7 @@ func createJob(w http.ResponseWriter, r *http.Request) {
 	_, err = c.WriteOne(fmt.Sprintf("INSERT OR REPLACE INTO %s (name,displayname,timezone,schedule,successcount,errorcount,lastsuccess,lasterror,disabled,retries,concurrency,status,next,ephemeral,expiresat,webhook,agent,owner,type) VALUES ('%s','%s','%s','%s',%d,%d,'%s','%s',%d,%d,'%s','%s','%s',%d,'%s','%s','%s',%d,'%s')", JOBS_TABLE_NAME, j.Name, j.DisplayName, j.Timezone, j.Schedule, j.SuccessCount, j.ErrorCount, j.LastSuccess, j.LastError, j.Disabled.IsSetBool2Int(), j.Retries, j.Concurrency, j.Status, j.Next, j.Ephemeral.IsSetBool2Int(), j.ExpiresAt, j.WebHook, j.Agent, j.Owner, j.Type))
 	if err != nil {
 		fmt.Println(err)
-		http.Error(w, "Error writting user to database", http.StatusInternalServerError)
+		http.Error(w, "Error writing user to database", http.StatusInternalServerError)
 		return
 	}
 
@@ -161,7 +161,7 @@ func updateJob(w http.ResponseWriter, r *http.Request) {
 	_, err := c.WriteOne(fmt.Sprintf("REPLACE INTO %s (name,displayname,timezone,schedule,successcount,errorcount,lastsuccess,lasterror,disabled,retries,concurrency,status,next,ephemeral,expiresat,webhook,agent,owner) VALUES ('%s','%s','%s','%s',%d,%d,'%s','%s',%d,%d,'%s','%s','%s',%d,'%s','%s','%s',%d) WHERE _rowid_=%d", JOBS_TABLE_NAME, j.Name, j.DisplayName, j.Timezone, j.Schedule, j.SuccessCount, j.ErrorCount, j.LastSuccess, j.LastError, j.Disabled.IsSetBool2Int(), j.Retries, j.Concurrency, j.Status, j.Next, j.Ephemeral.IsSetBool2Int(), j.ExpiresAt, j.WebHook, j.Agent, j.Owner, jid))
 	if err != nil {
 		fmt.Println(err)
-		http.Error(w, "Error writting user to database", http.StatusInternalServerError)
+		http.Error(w, "Error writing user to database", http.StatusInternalServerError)
 		return
 	}
 
