@@ -98,7 +98,11 @@ func (k *KronG) StartServer() {
 		k.Shutdown()
 	}
 	for _, j := range js {
-		k.Cron.AddJob(j.Schedule, j)
+		if err := j.IsValid(); err != nil {
+			k.logger.Errorf("job named %s is invalid. Error is %v", j.Name, err)
+		} else {
+			k.Cron.AddJob(j.Schedule, j)
+		}
 	}
 
 	<-signals
