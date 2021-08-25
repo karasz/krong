@@ -37,9 +37,8 @@ func (b *Bool) IsSetBool2Int() int {
 	if b.valid {
 		if b.value {
 			return 1
-		} else {
-			return 0
 		}
+		return 0
 	}
 	return -1
 }
